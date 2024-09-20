@@ -1,0 +1,51 @@
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    org.atmosphere: warn
+
+vaadin:
+  # Launch the default browser when starting the application in development mode
+  launch-browser: true
+  # To improve the performance during development.
+  # For more information https://vaadin.com/docs/latest/integrations/spring/configuration#special-configuration-parameters
+  allowed-packages:
+    - com.vaadin
+    - org.vaadin
+    - me.gulya.misaka
+  pnpm:
+    enable: true
+
+
+spring:
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+
+  telegram:
+    client:
+      api-id: ${TELEGRAM_API_ID}
+      api-hash: ${TELEGRAM_API_HASH}
+      phone: ${TELEGRAM_API_PHONE}
+      database-encryption-key: ${TELEGRAM_API_DATABASE_ENCRYPTION}
+      device-model: staring-misaka
+      use-message-database: true
+      use-file-database: false
+      use-chat-info-database: true
+      use-secret-chats: false
+      log-verbosity-level: 1
+      database-directory: ${TELEGRAM_DATABASE_PATH}
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:${SQLITE_PATH}
+
+telegram:
+  bot:
+    admin-id: ${TELEGRAM_ADMIN_ID}
+
+langchain4j:
+  anthropic:
+    chat-model:
+      api-key: ${ANTHROPIC_API_KEY}
+      model-name: claude-3-haiku-20240307
